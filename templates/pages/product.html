@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-8">
+        <img class="img-fluid" style="width: 650px; height: 600px;" src="{{ item.image.url }}" alt="">
+        </div>
+  
+        <div class="col-md-4">
+            <a href="" class="grey-text">
+                    <h5> {{item.get_category_display}} </h5>
+            </a>
+            <h5>
+            <strong>
+                <a href="#" class="dark-grey-text">{{item.title}}
+                {% if item.trend %}
+                  <span class="badge badge-pill badge-{{item.get_label_display}}"> {{item.get_trend_display}} </span>
+                {% endif %}
+                </a>
+            </strong>
+            </h5>
+  
+            <h3 class="font-weight-bold blue-text">
+            {% if item.discount_price %}
+            <strong>
+                <span>price:<del> ${{item.price}}</del></span>
+                <span>  ${{item.discount_price}}</span>
+            </strong>
+            {% else %}
+            <strong>
+                <span>price: ${{item.price}}</span>
+            </strong>        
+            {% endif %}
+            </h3>
+            <p> <strong><span class='text-info'>Description: </span></strong> {{item.description}} </p>
+            <p>
+    
+                {% comment %} <a href=" {% url 'buynow' item.id %} "><button class="btn btn-lg btn-info">Buy Now</button></a> {% endcomment %}
+                <a href= "{{item.add_item_to_cart}}"><button class="btn btn-lg btn-danger">Add to Cart</button></a>
+            </p>
+        </div>
+  
+    </div>
+  <!-- /.row -->
+
+  <hr>
+        
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center wow fadeIn">
+
+          <!--Grid column-->
+          <div class="col-md-6 text-center">
+
+            <h4 class="my-4 h4">Related Products</h4>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus suscipit modi sapiente illo soluta odit
+              voluptates,
+              quibusdam officia. Neque quibusdam quas a quis porro? Molestias illo neque eum in laborum.</p>
+
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+      
+      {% if cat_items %}
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+        {% for cat_item in cat_items  %}
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mr-auto mb-3">
+           <div class="card" style="width: 18rem;">
+                  <img  src="{{ cat_item.image.url }}" href="{% url 'product' cat_item.id %}" class="card-img-top" alt="...">
+                  <div class="card-body text-center">
+                          <a href="" class="grey-text">
+                              <h5>{{cat_item.get_category_display}}</h5>
+                          </a>
+                          <h5>
+                              <strong>
+                              <a href= "{{cat_item.get_absolute_url}}" class="dark-grey-text"> {{cat_item.title}}
+                              {% if cat_item.trend %}
+                                <span class="badge badge-pill badge-{{cat_item.get_label_display}}">{{cat_item.get_trend_display}}</span>
+                              {% endif %}
+                                
+                              </a>
+                              </strong>
+                          </h5>
+          
+                          <h4 class="font-weight-bold blue-text">
+                              <strong>
+                              {% if cat_item.discount_price %}
+                              <span class = 'mr-3'><del> ${{cat_item.discount_price}} </del></span>
+                              <span>${{cat_item.price}} </span>
+                              {% else %}
+                              <span> ${{cat_item.price}} </span>
+                              {% endif %}
+                              </strong>
+                          </h4>
+                  </div>
+              </div>
+          <!--Grid column-->
+        </div>
+        {% endfor %}
+        </div>
+        <!--Grid row-->
+        {% endif %}
+      
+</div>
+
+{% endblock content %}

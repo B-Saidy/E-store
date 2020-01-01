@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container mt-10">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 mt-2">
+    <div class="container">
+        <a class="navbar-brand" href="#">Fashion</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categories
+            </a>
+            <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
+            <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href=" {% url 'index' %} ">All Products</a>
+                <a class="dropdown-item" href="{% url 'fashion'%}">Fashion</a>
+                <a class="dropdown-item" href=" {% url 'furniture'%} ">Furniture</a>
+                <a class="dropdown-item" href="#">Electronics</a>
+                <a class="dropdown-item" href="#">Phones and Tablets</a>
+                <a class="dropdown-item" href="#">Computers and Accessories</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Uncategorized</a>
+            </div>
+            </li>
+        </ul>
+        </div>
+    </div>
+    </nav>
+    
+    <div class = 'row mb-4'>
+    {% for item in fashion %}
+        <div class="col-lg-3 col-md-6 mr-auto">
+            <div class="card" style="width: 18rem;">
+                <img  src="{{ item.image.url }}" href="{% url 'product' item.id %}" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                        <a href="" class="grey-text">
+                            <h5>{{item.get_category_display}}</h5>
+                        </a>
+                        <h5>
+                            <strong>
+                            <a href= "{{item.get_absolute_url}}" class="dark-grey-text"> {{item.title}}
+                            {% if item.trend %}
+                              <span class="badge badge-pill badge-{{item.get_label_display}}">{{item.get_trend_display}}</span>
+                            {% endif %}
+                               
+                            </a>
+                            </strong>
+                        </h5>
+        
+                        <h4 class="font-weight-bold blue-text">
+                            <strong>
+                            {% if item.discount_price %}
+                             <span class = 'mr-3'><del> ${{item.discount_price}} </del></span>
+                             <span>${{item.price}} </span>
+                            {% else %}
+                             <span> ${{item.price}} </span>
+                            {% endif %}
+                            </strong>
+                        </h4>
+                </div>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+  
+</div>
+{% endblock content %}
