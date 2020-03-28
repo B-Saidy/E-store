@@ -8,9 +8,7 @@
             <span class="text-muted">Your Order Summary</span>
             <span class="badge badge-secondary badge-pill"> {{total_qty}} </span>
         </h4>
-
           <!-- Cart -->
-         
           <ul class="list-group mb-3 z-depth-1">
            {% for cart_item in cartitems  %}
             <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -45,13 +43,13 @@
   
     
       <form action="{% url 'charge' %}" method="post">
-      {% csrf_token %}
-      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="{{ key }}"
-        data-description="A Django Charge"
-        data-amount="{{total}}"
-        data-locale="auto">
-      </script>
+        {% csrf_token %}
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="{{ key }}"
+          data-description="A Django Charge"
+          data-amount="{{total}}"
+          data-locale="auto">
+        </script>
     </form>
   </div> 
 
