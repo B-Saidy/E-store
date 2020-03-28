@@ -153,8 +153,8 @@ EMAIL_HOST_USER= os.environ.get('MY_EMAIL')
 EMAIL_HOST_PASSWORD = os.environ.get('MY_PASS')
 
 # Stripe Payment settings
-STRIPE_SECRET_KEY = os.environ.get('SK')
-STRIPE_PUBLISHABLE_KEY = os.environ.get('NPK')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SK')
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PK')
 
-# print(STRIPE_SECRET_KEY)
-# print(STRIPE_PUBLISHABLE_KEY)
+print(STRIPE_SECRET_KEY)
+print(STRIPE_PUBLISHABLE_KEY)
