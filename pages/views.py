@@ -23,12 +23,13 @@ def index(request):
     
     items_page_object = paginator.get_page(page)
     context = {
-        'items':items_page_object
+        'items':items_page_object,
+        'title':'Home'
     }
     return render(request, 'pages/index.html', context)
 
 def about(request):
-    return render(request, 'pages/about.html')
+    return render(request, 'pages/about.html', {'title':'About'})
 
 def product(request, id):
     item = get_object_or_404(Item, id=id)
@@ -36,6 +37,7 @@ def product(request, id):
     context = {
         'item':item,
         'cat_items':cat_items,
+        'title':item.title
     }
     return render(request, 'pages/product.html',context)
 @login_required
@@ -54,7 +56,8 @@ def cart(request):
         'subtotal':Subtotal,
         'shipping':Shipping,
         'total':total,
-        'cart_items':all_cart_items
+        'cart_items':all_cart_items,
+        'title':'Cart'
     }
     return render(request, 'pages/cart.html', context)
 
@@ -156,6 +159,7 @@ def checkout(request):
                 'shipping':Shipping,
                 'total':total,
                 'cart_items':all_cart_items,
+                'title':'Payment'
             }
            
             if payment_option == 'S':
@@ -184,7 +188,8 @@ def checkout(request):
             'shipping':Shipping,
             'total':total,
             'cart_items':all_cart_items,
-            "form":form
+            "form":form,
+            'title':'Checkout'
         }
         return render(request, 'pages/checkout.html', context)
 def stripe(request):
@@ -197,13 +202,15 @@ def cash(request):
 def fashion(request):
     fashion = Item.objects.filter(category = 'FS')
     context = {
-        'fashion':fashion 
+        'fashion':fashion,
+        'title':'Fashion'
     }
     return render(request, 'pages/fashion.html', context)
 def furniture(request):
     furniture = Item.objects.filter(category = 'FT')
     context = {
-        'furniture':furniture 
+        'furniture':furniture,
+        'title':'Furniture'
     }
     return render(request, 'pages/furniture.html', context)
 # @login_required
@@ -234,7 +241,8 @@ def search(request):
     search_items = Item.objects.filter(title__icontains = keyword)
     context = {
         'items':search_items,
-        'value': request.GET
+        'value': request.GET,
+        'title':keyword
     }
     return render(request, 'pages/search.html', context)
 def contact(request):
@@ -246,4 +254,4 @@ def contact(request):
         message = request.POST['message']
         Contact.objects.create(first_name=first_name, last_name=last_name, email=email, phone=phone, message=message)
         return redirect('index')
-    return render(request, 'pages/contact.html')
+    return render(request, 'pages/contact.html', {'title':'Contact'})

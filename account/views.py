@@ -14,9 +14,9 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect('login')
-        return render(request, 'account/register.html', {'form':form})
+        return render(request, 'account/register.html', {'form':form, 'title':'Register'})
     else:
-        return render(request, 'account/register.html', {'form':form})
+        return render(request, 'account/register.html', {'form':form, 'title':'Register'})
 def profile(request):
     if request.method == 'POST':
         updateform = ProfileUpdateForm(request.POST,request.FILES, instance = request.user.userprofile)
@@ -25,14 +25,15 @@ def profile(request):
             return redirect('profile')
         updateform= ProfileUpdateForm()
         context = {
-            'updateform':updateform
+            'updateform':updateform,
+            'title':'Profile'
         }
         return render(request, 'account/profile.html',context)
-        return render('profile')   
     else:
         updateform= ProfileUpdateForm()
         context = {
-            'updateform':updateform
+            'updateform':updateform,
+            'title':'Profile'
         }
         return render(request, 'account/profile.html',context)
     
