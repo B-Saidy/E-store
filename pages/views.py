@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.contrib import messages
 from .models import Contact
 from .form import CheckoutForm
 from .models import(
@@ -78,11 +79,13 @@ def add_to_cart(request,id):
             return redirect('cart')
         else:
             order.cart_items.add(cart_item)
-            return redirect('cart')
+            messages.success(request, 'Item has been successfully added to your cart')
+            return redirect('product', item.id)
 
     else:
         order = Order.objects.create(user=request.user, ordered=False)
         order.cart_items.add(cart_item)
+        messages.success(request, 'Item has been successfully added to your cart')
         return redirect('product', item.id)
     
         
@@ -165,7 +168,7 @@ def checkout(request):
             if payment_option == 'S':
                  return render(request, 'payment/stripe.html', context)
             elif payment_option == 'P':
-                return render(request, 'pages/paypal.html')
+                return render(request, 'pages/paypal.html', context)
             else:
                 return render(request, 'pages/cash.html')
             

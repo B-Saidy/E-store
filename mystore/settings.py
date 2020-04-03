@@ -156,3 +156,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('MY_PASS')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SK')
 STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PK')
 
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
