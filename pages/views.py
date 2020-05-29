@@ -18,7 +18,7 @@ from .models import(
 
 def index(request):
     items = Item.objects.all().order_by('-id')
-    paginator = Paginator(items, 8)
+    paginator = Paginator(items, 12)
     
     page = request.GET.get('page')
     

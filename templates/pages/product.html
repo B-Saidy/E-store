@@ -1,51 +1,152 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
     {% include 'partials/_alerts.html' %}
 
+<style>
+  #content-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .column{
+    width: 600px;
+    padding: 10px;
+  
+  }
+  
+  #featured{
+    max-width: 500px;
+    max-height: 600px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid black;
+  
+  }
+  
+  .thumbnail{
+    object-fit: cover;
+    max-width: 180px;
+    max-height: 100px;
+    cursor: pointer;
+    opacity: 0.5;
+    margin: 5px;
+    border: 2px solid black;
+  
+  }
+  
+  .thumbnail:hover{
+    opacity:1;
+  }
+  
+  .active{
+    opacity: 1;
+  }
+  
+  #slide-wrapper{
+    max-width: 500px;
+    display: flex;
+    min-height: 100px;
+    align-items: center;
+  }
+  
+  #slider{
+    width: 440px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  
+  }
+  
+  #slider::-webkit-scrollbar {
+      width: 8px;
+  
+  }
+  
+  #slider::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  
+  }
+   
+  #slider::-webkit-scrollbar-thumb {
+    background-color: #272722;
+    outline: 1px solid slategrey;
+     border-radius: 100px;
+  
+  }
+  
+  #slider::-webkit-scrollbar-thumb:hover{
+      background-color: #753900;
+  }
+  
+  .arrow{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: .3s;
+  }
+  
+  .arrow:hover{
+    opacity: .5;
+    width: 35px;
+    height: 35px;
+  }
+
+</style>
+
 <div class="container-fluid mt-4">
-    <div class="row ml-2">
-        <div class="col-md-8">
-        <img class="img-fluid" style="width: 650px; height: 600px;" src="{{ item.image.url }}" alt="">
-        </div>
-  
-        <div class="col-md-4">
-            {% comment %} <a href="" class="grey-text">
-                    <h5> {{item.get_category_display}} </h5>
-            </a> {% endcomment %}
-            <h5>
+
+<div id="content-wrapper">
+		
+		<div class="column">
+			<img id=featured src="{{ item.image.url }}">
+
+			<div id="slide-wrapper" >
+				<img id="slideLeft" class="arrow" src='{% static "img/l.png" %}'>
+
+				<div id="slider">
+					<img class="thumbnail active" src="{{ item.image.url }}">
+					<img class="thumbnail" src="{{ item.photo_1.url }}">
+					<img class="thumbnail" src="{{ item.photo_2.url }}">
+					<img class="thumbnail" src="{{ item.photo_3.url }}">
+					<img class="thumbnail" src="{{ item.photo_4.url }}">
+					<img class="thumbnail" src="{{ item.photo_5.url }}">
+				</div>
+
+				<img id="slideRight" class="arrow" src='{% static "img/r.png" %}'>
+			</div>
+		</div>
+
+		<div class="column">
+      <h1>{{item.title}}</h1>
+      {% if item.trend %}
+        <span class="badge badge-pill badge-{{item.get_label_display}}"> {{item.get_trend_display}} </span>
+      {% endif %}
+
+			<hr>
+			<h3>
+        {% if item.discount_price %}
             <strong>
-                <a href="#" class="dark-grey-text">{{item.title}}
-                {% if item.trend %}
-                  <span class="badge badge-pill badge-{{item.get_label_display}}"> {{item.get_trend_display}} </span>
-                {% endif %}
-                </a>
-            </strong>
-            </h5>
-  
-            <h3 class="font-weight-bold blue-text">
-            {% if item.discount_price %}
-            <strong>
-                <span>price:<del> ${{item.price}}</del></span>
+                <span><del> ${{item.price}}</del></span>
                 <span>  ${{item.discount_price}}</span>
             </strong>
             {% else %}
             <strong>
-                <span>price: ${{item.price}}</span>
+                <span>${{item.price}}</span>
             </strong>        
             {% endif %}
-            </h3>
-            <p> <strong><span class='text-info'>Description: </span></strong> {{item.description}} </p>
-            <p>
-    
-                {% comment %} <a href=" {% url 'buynow' item.id %} "><button class="btn btn-lg btn-info">Buy Now</button></a> {% endcomment %}
-                <a href= "{{item.add_item_to_cart}}"><button class="btn btn-lg btn-danger">Add to Cart</button></a>
-            </p>
-        </div>
-  
-    </div>
-  <!-- /.row -->
+      </h3>
 
+			<p> {{item.description}} </p>
+			<input value=1 type="number">
+			<a class="btn btn-dark"href= "{{item.add_item_to_cart}}">Add to Cart</a>
+		</div>
+
+  </div>
+  
   <hr>
         
         <!--Grid row-->
@@ -109,5 +210,40 @@
         {% endif %}
       
 </div>
+
+<script type="text/javascript">
+  let thumbnails = document.getElementsByClassName('thumbnail')
+
+  let activeImages = document.getElementsByClassName('active')
+
+  for (var i=0; i < thumbnails.length; i++){
+
+    thumbnails[i].addEventListener('mouseover', function(){
+      console.log(activeImages)
+      
+      if (activeImages.length > 0){
+        activeImages[0].classList.remove('active')
+      }
+      
+
+      this.classList.add('active')
+      document.getElementById('featured').src = this.src
+    })
+  }
+
+
+  let buttonRight = document.getElementById('slideRight');
+  let buttonLeft = document.getElementById('slideLeft');
+
+  buttonLeft.addEventListener('click', function(){
+    document.getElementById('slider').scrollLeft -= 180
+  })
+
+  buttonRight.addEventListener('click', function(){
+    document.getElementById('slider').scrollLeft += 180
+  })
+
+
+</script>
 
 {% endblock content %}

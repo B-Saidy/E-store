@@ -47,7 +47,12 @@ class Item(models.Model):
     category = models.CharField(choices = CATEGORY_CHOICE, max_length= 2)
     label = models.CharField(choices = LABEL_CHOICE, max_length= 2, blank = True, null=True)
     trend = models.CharField(choices = TREND_CHOICE, max_length= 2, blank = True, null=True)
-    image = models.ImageField(upload_to = 'photos')
+    image = models.ImageField(upload_to = 'photos', blank = True, null=True)
+    photo_1 = models.ImageField(default='2.jpg', upload_to = 'photos')
+    photo_2 = models.ImageField(default='2.jpg', upload_to = 'photos')
+    photo_3 = models.ImageField(default='2.jpg', upload_to = 'photos')
+    photo_4 = models.ImageField(default='2.jpg', upload_to = 'photos')
+    photo_5 = models.ImageField(default='2.jpg', upload_to = 'photos')
     weight = models.FloatField(blank=True, null=True, default=1)
     volume = models.FloatField(blank=True, null=True)
     def __str__(self):
@@ -68,6 +73,8 @@ class Item(models.Model):
         return self.volume*100
     def get_final_price(self):
         return self.get_shipping_cost() + self.item_price()
+    def get_discount_percent(self):
+        return round((self.price-self.discount_price)/self.price*100)
     
 class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
