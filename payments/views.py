@@ -3,7 +3,8 @@ from django.views.generic.base import TemplateView
 from django.conf import settings
 import stripe
 from pages.models import CartItem
-stripe.api_key = settings.STRIPE_SECRET_KEY
+import os
+stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 
 def total(request):
     all_cart_items = CartItem.objects.filter(user = request.user)
