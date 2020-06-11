@@ -16,8 +16,9 @@ from .models import(
     Payment
 )
 
+
 def index(request):
-    items = Item.objects.all().order_by('-id')
+    items = Item.objects.all().order_by('?')
     paginator = Paginator(items, 12)
     
     page = request.GET.get('page')
@@ -34,7 +35,7 @@ def about(request):
 
 def product(request, id):
     item = get_object_or_404(Item, id=id)
-    cat_items = Item.objects.filter(category = item.category).exclude(id=item.id)
+    cat_items = Item.objects.filter(category = item.category).exclude(id=item.id).order_by('?')[:3]
     context = {
         'item':item,
         'cat_items':cat_items,
@@ -216,6 +217,14 @@ def furniture(request):
         'title':'Furniture'
     }
     return render(request, 'pages/furniture.html', context)
+
+def electronics(request):
+    electronics = Item.objects.filter(category = 'ET')
+    context = {
+        'electronics':electronics,
+        'title':'electronics'
+    }
+    return render(request, 'pages/electronics.html', context)
 # @login_required
 # def buynow(request,id):
 #         item = get_object_or_404(Item, id=id)

@@ -17,14 +17,11 @@
             </a>
             <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
             <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href=" {% url 'index' %} ">All Products</a>
                 <a class="dropdown-item" href=" {% url 'fashion'%} ">Fashion</a>
-                <a class="dropdown-item" href=" {% url 'furniture'%} ">Furniture</a>
-                <a class="dropdown-item" href="#">Electronics</a>
-                <a class="dropdown-item" href="#">Phones and Tablets</a>
-                <a class="dropdown-item" href="#">Computers and Accessories</a>
+                <a class="dropdown-item" href=" {% url 'furniture' %} ">Furniture</a>
+                <a class="dropdown-item" href=" {% url 'electronics' %} ">Electronics</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Uncategorized</a>
+                <a class="dropdown-item" href="#">Something else here</a>
             </div>
             </li>
         </ul>
@@ -32,41 +29,48 @@
     </div>
     </nav>
     
-    <div class = 'row mb-4'>
+<div class="container mydiv">
+    <div class="row">
     {% for item in furniture %}
-        <div class="col-lg-3 col-md-6 mr-auto">
-            <div class="card" style="width: 18rem;">
-                <img  src="{{ item.image.url }}" href="{% url 'product' item.id %}" class="card-img-top" alt="...">
-                <div class="card-body text-center">
-                        <a href="" class="grey-text">
-                            <h5>{{item.get_category_display}}</h5>
-                        </a>
-                        <h5>
-                            <strong>
-                            <a href= "{{item.get_absolute_url}}" class="dark-grey-text"> {{item.title}}
+    <div class="col-md-4">
+      <div class="bbb_deals">
+        {% if item.discount_price %}
+        <div class="ribbon ribbbon-{{item.get_label_display}} ribbon-top-right"><span>
+            SAVE {{item.get_discount_percent}}%
+        </span></div>
+        {% endif %}
+          <div class="bbb_deals_slider_container">
+              <div class=" bbb_deals_item">
+                  <div class="bbb_deals_image"><img src="{{ item.image.url }}" alt=""></div>
+                  <div class="bbb_deals_content">
+                      <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+                          <div class="bbb_deals_item_category"><a href="#">{{item.get_category_display}}</a></div>
+                          <div class="bbb_deals_item_price_a ml-auto">
                             {% if item.trend %}
                               <span class="badge badge-pill badge-{{item.get_label_display}}">{{item.get_trend_display}}</span>
                             {% endif %}
-                               
-                            </a>
-                            </strong>
-                        </h5>
-        
-                        <h4 class="font-weight-bold blue-text">
-                            <strong>
+                          </div>
+                      </div>
+                      <div class="bbb_deals_info_line d-flex flex-row justify-content-start">
+                          <div class="bbb_deals_item_name"><a href= "{{item.get_absolute_url}}" class="dark-grey-text"> {{item.title}}</a></div>
+                          <div class="bbb_deals_item_price ml-auto">
                             {% if item.discount_price %}
-                             <span class = 'mr-3'><del> ${{item.discount_price}} </del></span>
-                             <span>${{item.price}} </span>
+                             <span class = 'mr-3'><del> ${{item.price}} </del></span>
+                             <span>${{item.discount_price}} </span> 
                             {% else %}
                              <span> ${{item.price}} </span>
                             {% endif %}
-                            </strong>
-                        </h4>
-                </div>
-            </div>
-        </div>
-      {% endfor %}
-    </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
   
 </div>
 {% endblock content %}

@@ -86,9 +86,7 @@
             <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href=" {% url 'fashion'%} ">Fashion</a>
                 <a class="dropdown-item" href=" {% url 'furniture' %} ">Furniture</a>
-                <a class="dropdown-item" href="#">Electronics</a>
-                <a class="dropdown-item" href="#">Phones and Tablets</a>
-                <a class="dropdown-item" href="#">Computers and Accessories</a>
+                <a class="dropdown-item" href=" {% url 'electronics' %} ">Electronics</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
             </div>
@@ -97,7 +95,8 @@
         </div>
     </div>
     </nav>
-  
+  </div>
+
   <div class="container mydiv">
     <div class="row">
     {% for item in items %}
@@ -142,7 +141,7 @@
 </div>
 
    
-</div>
+
 <div class="container mb-3">
 <div class="row">
     {% if items.has_other_pages %}

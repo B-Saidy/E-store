@@ -11,6 +11,7 @@ urlpatterns = [
     path('checkout/',views.checkout, name='checkout'),
     path('fashion/',views.fashion, name='fashion'),
     path('furniture/',views.furniture, name='furniture'),
+    path('electronics/',views.electronics, name='electronics'),
     # path('<int:id>/buynow/',views.buynow, name='buynow'),
     path('search/',views.search, name='search'),
     path('checkout/stripe/',views.stripe, name='stripe'),
