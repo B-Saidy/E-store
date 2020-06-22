@@ -7,13 +7,13 @@
 <div class="container-fluid mt-4">
 
 <div id="content-wrapper">
-		
 		<div class="column">
-			<img id=featured src="{{ item.image.url }}">
-
+      <div id="img-container">
+				<div id="lens"></div>
+          <img id=featured src="{{ item.image.url }}">
+      </div>
 			<div id="slide-wrapper" >
 				<img id="slideLeft" class="arrow" src='{% static "img/l.png" %}'>
-
 				<div id="slider">
 					<img class="thumbnail active" src="{{ item.image.url }}">
 					<img class="thumbnail" src="{{ item.photo_1.url }}">
