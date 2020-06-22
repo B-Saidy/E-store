@@ -253,9 +253,6 @@ body {
     --input-padding-x: 1.5rem;
     --input-padding-y: .75rem;
   }
-  #sticky-footer {
-    flex-shrink: none;
-  }
 
   .pagin {
     margin-left: auto;
