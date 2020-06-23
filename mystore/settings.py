@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
-ALLOWED_HOSTS = ['unirand.herokuapp.com']
+ALLOWED_HOSTS = ['unirand.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -172,7 +172,7 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('UNIRAND_BUCKET')
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'mystore.custom_storage.MediaStorage'
 
 AWS_S3_REGION_NAME = 'us-east-2' #change to your region
