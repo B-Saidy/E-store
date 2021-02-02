@@ -69,8 +69,10 @@ class Item(models.Model):
         return self.price
     def get_shipping_cost(self):
         if self.weight:
+            if self.volume:
+                return (self.weight*10) + (self.volume*100)
             return self.weight*10
-        return int(self.volume*100)
+         
     def get_final_price(self):
         return self.get_shipping_cost() + self.item_price()
     def get_discount_percent(self):
