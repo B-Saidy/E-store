@@ -1,4 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\dell\\Desktop\\web\\venv\\django_env\\Scripts\\python.exe",
-    "python.autoComplete.extraPaths":  ["C:\\Python\\python.exe"]
+    "python.autoComplete.extraPaths": [
+        "C:\\Python\\python.exe"
+    ]
 }
