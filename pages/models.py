@@ -72,6 +72,8 @@ class Item(models.Model):
             if self.volume:
                 return (self.weight*10) + (self.volume*100)
             return self.weight*10
+        else:
+            return 0.0
          
     def get_final_price(self):
         return self.get_shipping_cost() + self.item_price()
