@@ -7,7 +7,7 @@
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <h5 class="card-title text-center">Sign In</h5>
+            <h5 class="card-title text-center">Sign in</h5>
             <form class="form-signin" method='post'>
                {% csrf_token %}
               <div>
@@ -18,8 +18,9 @@
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                 <label class="custom-control-label" for="customCheck1">Remember password</label>
               </div>
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Sign in</button>
               <a href="{% url 'password_reset' %}" class = 'text-muted'>forgot password?</a>
+              <p>Are you new here?  <a class="btn btn-lg btn-dark btn-block text-uppercase" href=" {% url 'register'%} ">Register</a> </p>
             </form>
           </div>
         </div>

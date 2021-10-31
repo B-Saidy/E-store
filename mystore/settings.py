@@ -175,7 +175,7 @@ AWS_DEFAULT_ACL = None
 
 DEFAULT_FILE_STORAGE = 'mystore.custom_storage.MediaStorage'
 
-AWS_S3_REGION_NAME = 'us-east-2' #change to your region
+AWS_S3_REGION_NAME = 'us-east-2' 
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 CORS_ORIGIN_ALLOW_ALL=True

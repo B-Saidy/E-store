@@ -349,3 +349,7 @@ transform: scale(1.5);
     bottom: 0px;
 }
 
+.card-signin {
+    width: auto;
+    margin-bottom: 10px;
+}

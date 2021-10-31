@@ -15,12 +15,12 @@
                   <div>
                     {{form|crispy}}
                   </div>
-                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
-                  <a class="d-block text-center mt-2 small" href="#">Sign In</a>
+                  <button class="btn btn-lg btn-dark btn-block text-uppercase" type="submit">Register</button>
+                  <p>Already been here? <a class="btn btn-lg btn-dark btn-block text-uppercase" href=" {% url 'login'%} ">Sign in</a></p> 
                 </form>
               </div>
             </div>
           </div>
         </div>
-      </div>
+  </div>
 {% endblock content %}
